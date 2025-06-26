@@ -1,0 +1,20 @@
+# Ficheiros e pastas gerados pelo Maven
+/target/
+
+# Ficheiros gerados pelo NetBeans
+/nb-configuration.xml
+/nbactions.xml
+
+# Ficheiros gerados pelo IDE
+.idea/
+*.iml
+*.iws
+
+# Logs
+*.log
+log/
+
+# Ficheiros do sistema operacional
+.DS_Store
+Thumbs.db
+

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+
+    <!-- Define o estágio do projeto. "Development" mostra mais detalhes de erro. Mude para "Production" em produção. -->
+    <context-param>
+        <param-name>jakarta.faces.PROJECT_STAGE</param-name>
+        <param-value>Development</param-value>
+    </context-param>
+
+    <!-- Configuração do Servlet principal do Jakarta Faces -->
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>jakarta.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <!-- Mapeamento: Diz ao servidor para usar o "Faces Servlet" para todas as URLs que terminam em .xhtml -->
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
+    
+    <!-- Define a página inicial do projeto -->
+    <welcome-file-list>
+        <!-- Alterado de index.xhtml para estudantes.xhtml -->
+        <welcome-file>estudantes.xhtml</welcome-file>
+    </welcome-file-list>
+    
+    <!-- Configuração do tema do PrimeFaces. Saga é um tema moderno e limpo. -->
+    <context-param>
+        <param-name>primefaces.THEME</param-name>
+        <param-value>saga</param-value>
+    </context-param>
+
+</web-app>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/IFMT_acesso">
+    <Resource name="jdbc/ifmt_acesso"
+              auth="Container"
+              type="javax.sql.DataSource"
+              maxActive="100"
+              maxIdle="30"
+              maxWait="10000"
+              username="root"
+              password=""
+              driverClassName="com.mysql.cj.jdbc.Driver"
+              url="jdbc:mysql://localhost:3306/ifmt_acesso?useSSL=false&amp;serverTimezone=UTC"/>
+</Context>

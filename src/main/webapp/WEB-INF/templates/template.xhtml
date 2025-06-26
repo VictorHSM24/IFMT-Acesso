@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>IFMT - Controle de Acesso</title>
+    <h:outputStylesheet name="css/style.css" />
+</h:head>
+
+<h:body>
+    <div class="page-container">
+        <!-- Cabeçalho da página -->
+        <div class="page-header">
+             <h:panelGrid columns="2" style="width: 100%; vertical-align: middle;">
+                <p:graphicImage name="images/logo.png" width="70" style="margin-right: 20px;"/>
+                <h:outputText value="Sistema de Controle de Acesso de Estudantes" styleClass="header-title"/>
+            </h:panelGrid>
+        </div>
+
+        <!-- Barra de Menu -->
+        <div class="page-menu">
+            <h:form>
+                <p:menubar>
+                    <p:menuitem value="Cadastro de Estudantes" url="#{request.contextPath}/estudantes.xhtml" icon="pi pi-fw pi-users"/>
+                    <p:menuitem value="Registrar Acesso" url="#{request.contextPath}/registros.xhtml" icon="pi pi-fw pi-arrows-h"/>
+                    <p:menuitem value="Consultar Registros" url="#{request.contextPath}/consultas.xhtml" icon="pi pi-fw pi-search"/>
+                </p:menubar>
+            </h:form>
+        </div>
+
+        <!-- Área de conteúdo principal -->
+        <div class="page-content">
+            <ui:insert name="content">
+                <!-- O conteúdo de cada página será inserido aqui -->
+            </ui:insert>
+        </div>
+
+        <!-- Rodapé da página -->
+        <div class="page-footer">
+            <h:outputText value="Desenvolvido por Victor Hugo - Linguagem de Programação VI - TADS 5º semestre - 2025" />
+        </div>
+    </div>
+
+    <!-- Indicador de carregamento global para requisições AJAX -->
+    <p:ajaxStatus styleClass="ajax-status">
+        <f:facet name="start">
+            <div class="ajax-status-overlay"></div>
+            <i class="pi pi-spin pi-spinner" style="font-size: 2em;"></i>
+        </f:facet>
+        <f:facet name="complete">
+            <h:outputText value="" />
+        </f:facet>
+    </p:ajaxStatus>
+</h:body>
+</html>
