@@ -6,25 +6,26 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-@Table(name = "registros_acesso")
+@Table(name = "registro_acesso") 
 public class RegistroAcesso implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_registro") 
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "estudante_id", nullable = false)
     private Estudante estudante;
 
-    @Column(nullable = false)
+    @Column(name = "data_hora", nullable = false)
     private LocalDateTime dataHora;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 10)
     private TipoMovimentacao tipo;
 
-    // Getters e Setters
+    // Getters e Setters...
     public Integer getId() { return id; }
     public void setId(Integer id) { this.id = id; }
     public Estudante getEstudante() { return estudante; }

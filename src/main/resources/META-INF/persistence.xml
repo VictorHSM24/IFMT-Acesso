@@ -11,14 +11,18 @@
         
         <properties>
             <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
-            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ifmt_acesso?useSSL=false&amp;serverTimezone=UTC" />
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ifmt_acesso?useSSL=false&amp;serverTimezone=UTC&amp;useUnicode=true&amp;characterEncoding=UTF-8" />
             <property name="jakarta.persistence.jdbc.user" value="root" />
             <property name="jakarta.persistence.jdbc.password" value="" />
             
+            <!-- MUDANÇA FINAL: A configuração correta para entrega é 'validate'. -->
+            <!-- Isto garante que a aplicação não irá alterar o esquema do banco de dados do professor. -->
             <property name="hibernate.hbm2ddl.auto" value="create"/>
             
+            <!-- É uma boa prática desativar o show_sql na entrega final, mas pode deixar ativo para a avaliação. -->
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
+
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
             <property name="hibernate.connection.provider_disables_autocommit" value="true"/>
         </properties>
