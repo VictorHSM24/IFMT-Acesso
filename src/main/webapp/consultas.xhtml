@@ -1,0 +1,75 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/WEB-INF/templates/template.xhtml">
+
+    <ui:define name="content">
+        <h:form id="formConsulta">
+            <p:panel header="Filtros de Consulta de Registros">
+                <p:panelGrid columns="4" styleClass="ui-panelgrid-blank">
+                    
+                    <p:outputLabel for="nomeMatricula" value="Nome/Matrícula:"/>
+                    <p:inputText id="nomeMatricula" value="#{consultaBean.nomeMatriculaFiltro}" placeholder="Digite nome ou matrícula...">
+                        <!-- MUDANÇA: Adicionado AJAX para filtrar ao digitar -->
+                        <p:ajax event="keyup" listener="#{consultaBean.buscar}" update="tabelaResultados" delay="500"/>
+                    </p:inputText>
+                    
+                    <p:outputLabel for="dataInicio" value="Data de Início:"/>
+                    <p:calendar id="dataInicio" value="#{consultaBean.dataInicioFiltro}" pattern="dd/MM/yyyy" mask="true" placeholder="dd/mm/aaaa">
+                        <!-- MUDANÇA: Adicionado AJAX para filtrar ao selecionar data -->
+                        <p:ajax event="dateSelect" listener="#{consultaBean.buscar}" update="tabelaResultados"/>
+                    </p:calendar>
+                    
+                    <p:outputLabel for="dataFim" value="Data de Fim:"/>
+                    <p:calendar id="dataFim" value="#{consultaBean.dataFimFiltro}" pattern="dd/MM/yyyy" mask="true" placeholder="dd/mm/aaaa">
+                        <!-- MUDANÇA: Adicionado AJAX para filtrar ao selecionar data -->
+                        <p:ajax event="dateSelect" listener="#{consultaBean.buscar}" update="tabelaResultados"/>
+                    </p:calendar>
+                    
+                    <p:outputLabel for="tipo" value="Tipo de Acesso:"/>
+                    <p:selectOneMenu id="tipo" value="#{consultaBean.tipoMovimentacaoFiltro}">
+                        <f:selectItem itemLabel="Todos" itemValue="#{null}" noSelectionOption="true"/>
+                        <f:selectItems value="#{consultaBean.tiposMovimentacao}" var="t" itemLabel="#{t}" itemValue="#{t}"/>
+                        <!-- MUDANÇA: Adicionado AJAX para filtrar ao mudar a seleção -->
+                        <p:ajax listener="#{consultaBean.buscar}" update="tabelaResultados"/>
+                    </p:selectOneMenu>
+                </p:panelGrid>
+                <f:facet name="footer">
+                    <!-- MUDANÇA: Botão "Buscar" removido. O botão "Limpar Filtros" agora tem um ícone melhor. -->
+                    <p:commandButton value="Limpar Filtros" icon="pi pi-refresh" action="#{consultaBean.limparFiltros}" update="@form" styleClass="ui-button-secondary"/>
+                </f:facet>
+            </p:panel>
+            
+            <p:spacer height="20"/>
+
+            <p:dataTable id="tabelaResultados" var="reg" value="#{consultaBean.registrosFiltrados}"
+                         paginator="true" rows="15" emptyMessage="Nenhum registro encontrado."
+                         paginatorPosition="bottom"
+                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="15,30,50">
+
+                <p:column headerText="Nome do Estudante" sortBy="#{reg.estudante.nomeCompleto}">
+                    <h:outputText value="#{reg.estudante.nomeCompleto}" />
+                </p:column>
+                <p:column headerText="Matrícula" sortBy="#{reg.estudante.matricula}">
+                    <h:outputText value="#{reg.estudante.matricula}" />
+                </p:column>
+                <p:column headerText="Data" sortBy="#{reg.dataHora}">
+                    <h:outputText value="#{reg.dataHora}">
+                        <f:convertDateTime type="localDate" pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Hora" sortBy="#{reg.dataHora}">
+                    <h:outputText value="#{reg.dataHora}">
+                        <f:convertDateTime type="localTime" pattern="HH:mm:ss" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Tipo de Movimentação" sortBy="#{reg.tipo}">
+                    <h:outputText value="#{reg.tipo}" />
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>
